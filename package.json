@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "command-line-args": "^5.0.2",
+    "dotenv": "^16.0.0",
     "truffle-contract": "^3.0.6",
     "web3": "^1.0.0-beta.34"
   },
