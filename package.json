@@ -1,7 +1,7 @@
 {
-  "name": "rapid-box",
+  "name": "monopoly-blockchain-backend",
   "version": "0.1.0",
-  "description": "A quick start box to create APIs for smart contract interactions in Express.",
+  "description": "Monopoly blockchain backend",
   "main": "server.js",
   "directories": {
     "test": "test"
@@ -10,14 +10,14 @@
     "command-line-args": "^5.0.2",
     "dotenv": "^16.0.0",
     "truffle-contract": "^3.0.6",
-    "web3": "^1.0.0-beta.34"
+    "web3": "1.7.3"
   },
   "devDependencies": {
+    "@truffle/debugger": "^10.0.8",
     "nodemon": "^1.17.5"
   },
   "scripts": {
     "start": "nodemon server.js"
   },
-  "author": "Omkar Khair",
   "license": "MIT"
 }
