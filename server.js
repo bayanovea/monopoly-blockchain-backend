@@ -1,9 +1,7 @@
 const express = require('express');
-var bodyParser = require('body-parser');
-
 const Contracts = require('./app/contracts.js');
-
-const port = process.env.PORT || 80;
+const port = process.env.APP_PORT || 80;
+var bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.json());
