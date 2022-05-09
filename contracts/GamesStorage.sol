@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "./GameInstance.sol";
+
 contract GamesStorage {
     enum Status {
         NEW,
@@ -26,32 +28,42 @@ contract GamesStorage {
         return (game.status);
     }
 
-    function addGame() public {
+    function addGame() public returns (address) {
         address[] memory playersAddresses;
 
-        // TODO: Deploy Game and use deployed address instead of hardcode value
-        address newGameAddress = 0x1000000000000000000000000000000000000000;
+        GameInstance newGameInstance = new GameInstance();
+        address newGameAddress = address(newGameInstance);
 
         Game memory newGame = Game(playersAddresses, Status.NEW);
         games[newGameAddress] = newGame;
+
+        return newGameAddress;
     }
 
-    function getPlayer(address _address)
-        public
-        view
-        returns (string memory name, uint256 balance)
-    {
+    function getPlayer(address _address) public view returns (string memory) {
         Player memory player = players[_address];
-        return (player.name, player.balance);
+        return player.name;
     }
 
     function addPlayer(string memory _name) public {
-        players[msg.sender] = Player(_name, 0);
+        players[msg.sender] = Player(_name, 100);
     }
 
     function addPlayerToGame(address gameAddress, address playerAddress)
         public
     {
         games[gameAddress].playersAddresses.push(playerAddress);
+
+        GameInstance gameInstance = GameInstance(gameAddress);
+        gameInstance.addPlayer(playerAddress, players[playerAddress].name);
+    }
+
+    function makeMove(address gameAddress, address playerAddress) public {
+        GameInstance gameInstance = GameInstance(gameAddress);
+
+        // Player memory player = players[playerAddress];
+        // TODO: Exception if no game instance
+
+        gameInstance.makeMove(playerAddress);
     }
 }
